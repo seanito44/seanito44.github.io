@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Jasmine</title>
+
+  <!-- Poetic serif font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: black;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Star field using multiple layers for visibility */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, #ffffffcc 50%, transparent 51%),
+        radial-gradient(1px 1px at 80% 30%, #ffffffcc 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 50% 60%, #ffffffdd 50%, transparent 51%),
+        radial-gradient(1px 1px at 20% 80%, #ffffffcc 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 90% 70%, #ffffffdd 50%, transparent 51%);
+      background-size: 300px 300px;
+      opacity: 0.85;
+      z-index: -1;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    /* Title screen */
+    .title {
+      font-size: 3rem;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
+
+    .subtitle {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      opacity: 0.6;
+    }
+
+    .stanza {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 1.8s ease-out, transform 1.8s ease-out;
+    }
+
+    .stanza.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stanza p {
+      font-size: 1.6rem;
+      line-height: 1.75;
+      max-width: 650px;
+      letter-spacing: 0.015em;
+    }
+
+    .emphasis {
+      color: #9fd3a5; /* soft cosmic green */
+    }
+
+    .photo-section img {
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(255,255,255,0.18);
+    }
+
+    .caption {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      .stanza p { font-size: 1.3rem; }
+      .title { font-size: 2.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Title Screen -->
+  <section class="stanza">
+    <div>
+      <div class="title">APHELION</div>
+      <div class="subtitle">for you</div>
+    </div>
+  </section>
+
+  <!-- Stanza 1 -->
+  <section class="stanza">
+    <p>
+      Underneath the starry sky, getting darker,<br />
+      Here I write the loneliest kind of mathematics.<br />
+      “Aphelion”, not quite capturing the feeling<br />
+      Of being untethered, unfound, unknown.
+    </p>
+  </section>
+
+  <!-- Stanza 2 -->
+  <section class="stanza">
+    <p>
+      Each day is a shorter one. And somehow longer. Tedious.<br />
+      My sun, visible for a moment, before leaving the world<br />
+      And I, cradling air, settle for vapid sleep<br />
+      Until I can see her again.
+    </p>
+  </section>
+
+  <!-- Stanza 3 -->
+  <section class="stanza">
+    <p>
+      Laying in a thick pool of outskirts’ swirling silence<br />
+      I think. And drift into dreams<br />
+      Where I can talk more and more, loud enough<br />
+      That the words reach her somehow.<br /><br />
+      And feel her glow across my skin<br />
+      That melts away the miles between.
+    </p>
+  </section>
+
+  <!-- Stanza 4 -->
+  <section class="stanza">
+    <p>
+      Then I wake up. Cold sweat, hot pillow. Dead night.<br />
+      But I look out the window anyway, and see it:<br />
+      The moon, with a radiance, a brilliance<br />
+      That only she could give, even when she’s far away.
+    </p>
+  </section>
+
+  <!-- Stanza 5 -->
+  <section class="stanza">
+    <p>
+      Underneath the violet sky, I ponder the word<br />
+      “Aphelion”, not quite capturing the excitement<br />
+      Of the moment before coming home.<br />
+      And I onward, gently drawn by patient hands, these words suffice:
+    </p>
+  </section>
+
+  <!-- Stanza 6 -->
+  <section class="stanza">
+    <p>
+      Still I feel her warmth, still I see her light,<br />
+      Still I smell her precious petals in angelic white<br />
+      Still I hear her sweetest songs that cure the sorrow sighs<br />
+      Still, I learn to see the world through her sunny eyes.
+    </p>
+  </section>
+
+  <!-- Stanza 7 (Final Echo) -->
+  <section class="stanza">
+    <p>
+      Still, I learn to see the world <span class="emphasis">in</span> her sunny eyes.
+    </p>
+  </section>
+
+  <!-- Photo Section -->
+  <section class="photo-section stanza">
+    <img src="photo.jpg" alt="Us together" />
+    <div class="caption">And somehow, in all this space — I found you.</div>
+  </section>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    document.querySelectorAll('.stanza').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+
+</body>
+</html>
